@@ -1,43 +1,463 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Privacy Policy</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Privacy Policy – Neo School App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy: #0f1f3d;
+      --navy-mid: #1a3260;
+      --blue: #2563eb;
+      --blue-light: #eff6ff;
+      --teal: #0ea5e9;
+      --green: #16a34a;
+      --green-light: #dcfce7;
+      --red: #dc2626;
+      --red-light: #fee2e2;
+      --amber: #d97706;
+      --amber-light: #fffbeb;
+      --rule: #e2e8f0;
+      --muted: #64748b;
+      --text: #1e293b;
+      --bg: #f8fafc;
+      --white: #ffffff;
+      --purple: #7c3aed;
+      --purple-light: #ede9fe;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15.5px;
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0a1628 0%, var(--navy-mid) 55%, #1e3a8a 100%);
+      color: #fff;
+      padding: 64px 24px 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 380px; height: 380px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #2563eb33 0%, transparent 70%);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: #cbd5e1;
+      font-size: 11.5px;
+      font-weight: 500;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 5px 16px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+    .badge-dot { width:6px; height:6px; border-radius:50%; background:#4ade80; animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+    header h1 { font-family:'Playfair Display',serif; font-size:clamp(30px,5vw,50px); font-weight:700; letter-spacing:-.02em; line-height:1.15; margin-bottom:12px; }
+    header h1 span { color: var(--teal); }
+    header p { color:#94a3b8; font-size:14px; max-width:440px; margin:0 auto 28px; }
+    .meta-chips { display:flex; justify-content:center; flex-wrap:wrap; gap:10px; }
+    .chip { background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.14); color:#cbd5e1; font-size:12px; padding:4px 14px; border-radius:100px; }
+    .chip strong { color:#e2e8f0; }
+
+    .coppa-banner {
+      background: linear-gradient(135deg, #7c3aed, #2563eb);
+      color:#fff; padding:16px 24px; text-align:center;
+      font-size:13.5px; font-weight:500;
+      display:flex; align-items:center; justify-content:center; gap:10px;
+    }
+
+    .wrapper { max-width:880px; margin:0 auto; padding:48px 24px 80px; }
+
+    .intro-card {
+      background:var(--blue-light); border:1px solid #bfdbfe;
+      border-left:4px solid var(--blue); border-radius:12px;
+      padding:22px 26px; margin-bottom:36px;
+      display:flex; gap:14px; align-items:flex-start;
+    }
+    .intro-card p { font-size:14.5px; color:#1e40af; line-height:1.7; }
+
+    .data-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:14px; margin-bottom:40px; }
+    .data-card { background:var(--white); border:1px solid var(--rule); border-radius:14px; padding:20px 16px; text-align:center; transition:box-shadow .2s; }
+    .data-card:hover { box-shadow:0 4px 16px rgba(37,99,235,.08); }
+    .data-card .dc-icon { font-size:26px; margin-bottom:8px; }
+    .data-card .dc-label { font-size:12px; font-weight:600; color:var(--navy); text-transform:uppercase; letter-spacing:.06em; margin-bottom:4px; }
+    .data-card .dc-desc { font-size:12px; color:var(--muted); }
+
+    .toc { background:var(--white); border:1px solid var(--rule); border-radius:14px; padding:28px 32px; margin-bottom:40px; box-shadow:0 1px 4px rgba(0,0,0,.05); }
+    .toc-title { font-family:'Playfair Display',serif; font-size:16px; font-weight:600; color:var(--navy); margin-bottom:16px; display:flex; align-items:center; gap:10px; }
+    .toc-title::after { content:''; flex:1; height:1px; background:var(--rule); }
+    .toc ol { list-style:none; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:8px 24px; }
+    .toc a { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--muted); font-size:13.5px; transition:color .2s; }
+    .toc a:hover { color:var(--blue); }
+    .toc-num { display:flex; align-items:center; justify-content:center; width:22px; height:22px; background:var(--rule); border-radius:50%; font-size:11px; font-weight:600; color:var(--muted); flex-shrink:0; }
+    @media(max-width:520px){ .toc ol { grid-template-columns:1fr; } }
+
+    .section { background:var(--white); border:1px solid var(--rule); border-radius:16px; padding:32px 36px; margin-bottom:24px; box-shadow:0 1px 3px rgba(0,0,0,.04); scroll-margin-top:24px; transition:box-shadow .2s; }
+    .section:hover { box-shadow:0 4px 16px rgba(37,99,235,.07); }
+    @media(max-width:600px){ .section { padding:22px 18px; } }
+
+    .section-header { display:flex; align-items:flex-start; gap:16px; margin-bottom:22px; padding-bottom:18px; border-bottom:1px solid var(--rule); }
+    .section-num { display:flex; align-items:center; justify-content:center; min-width:42px; height:42px; background:var(--blue-light); color:var(--blue); font-size:13px; font-weight:700; border-radius:10px; }
+    .section-num.green { background:var(--green-light); color:var(--green); }
+    .section-num.purple { background:var(--purple-light); color:var(--purple); }
+    .section-num.amber { background:var(--amber-light); color:var(--amber); }
+    .section-num.red { background:var(--red-light); color:var(--red); }
+    .section-title { font-family:'Playfair Display',serif; font-size:20px; font-weight:600; color:var(--navy); line-height:1.3; margin-bottom:2px; }
+    .section-subtitle { font-size:12px; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; }
+    .section p { color:#334155; font-size:15px; margin-bottom:14px; }
+    .section p:last-child { margin-bottom:0; }
+
+    .policy-list { list-style:none; padding:0; display:flex; flex-direction:column; gap:10px; margin:10px 0; }
+    .policy-list li { display:flex; align-items:flex-start; gap:12px; font-size:15px; color:#334155; }
+    .li-mark { display:flex; align-items:center; justify-content:center; width:22px; height:22px; border-radius:50%; flex-shrink:0; margin-top:2px; font-size:11px; font-weight:700; }
+    .li-mark.blue { background:var(--blue-light); color:var(--blue); }
+    .li-mark.green { background:var(--green-light); color:var(--green); }
+    .li-mark.red { background:var(--red-light); color:var(--red); }
+    .li-mark.amber { background:var(--amber-light); color:var(--amber); }
+
+    .callout { border-radius:10px; padding:16px 20px; margin:16px 0; font-size:14px; line-height:1.7; }
+    .callout.blue { background:var(--blue-light); border:1px solid #bfdbfe; color:#1e40af; }
+    .callout.green { background:var(--green-light); border:1px solid #86efac; color:#14532d; }
+    .callout.amber { background:var(--amber-light); border:1px solid #fde68a; color:#78350f; }
+    .callout.red { background:var(--red-light); border:1px solid #fca5a5; color:#7f1d1d; }
+    .callout.purple { background:var(--purple-light); border:1px solid #c4b5fd; color:#4c1d95; }
+    .callout-title { font-weight:600; margin-bottom:4px; display:flex; align-items:center; gap:6px; font-size:14.5px; }
+
+    .data-table { width:100%; border-collapse:collapse; margin:16px 0; font-size:14px; }
+    .data-table th { background:#f1f5f9; color:var(--navy); font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:.07em; padding:10px 14px; text-align:left; border:1px solid var(--rule); }
+    .data-table td { padding:10px 14px; border:1px solid var(--rule); color:#334155; vertical-align:top; }
+    .data-table tr:hover td { background:#f8fafc; }
+
+    .retention-timeline { display:flex; flex-direction:column; gap:0; margin:18px 0; position:relative; }
+    .retention-timeline::before { content:''; position:absolute; left:20px; top:24px; bottom:24px; width:2px; background:linear-gradient(to bottom,var(--blue),var(--teal)); }
+    .rt-item { display:flex; align-items:flex-start; gap:16px; padding:14px 0; }
+    .rt-dot { display:flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:50%; background:var(--blue); color:#fff; font-size:12px; font-weight:700; flex-shrink:0; z-index:1; position:relative; }
+    .rt-dot.teal { background:var(--teal); }
+    .rt-dot.green { background:var(--green); }
+    .rt-dot.amber { background:var(--amber); }
+    .rt-content { flex:1; padding-top:8px; }
+    .rt-content strong { display:block; font-size:14px; color:var(--navy); margin-bottom:2px; }
+    .rt-content span { font-size:13.5px; color:var(--muted); }
+
+    .contact-box { background:#f8fafc; border:1px solid var(--rule); border-radius:12px; padding:22px 26px; margin-top:16px; display:flex; flex-direction:column; gap:10px; }
+    .contact-box div { font-size:14.5px; color:#334155; }
+
+    footer { background:var(--navy); color:#94a3b8; text-align:center; padding:44px 24px; }
+    footer p { font-size:13.5px; line-height:1.8; }
+    footer a { color:var(--teal); text-decoration:none; }
+    footer strong { color:#e2e8f0; }
+    .footer-divider { width:60px; height:2px; background:linear-gradient(90deg,var(--blue),var(--teal)); border-radius:2px; margin:18px auto; }
+  </style>
 </head>
 <body>
-<h1>Privacy Policy</h1>
-<p>Last updated: January 2026</p>
 
-<p>This Privacy Policy describes how we collect, use, and protect your information when you use our School Management Application.</p>
+<header>
+  <div class="badge"><span class="badge-dot"></span> Official Legal Document</div>
+  <h1>Privacy <span>Policy</span></h1>
+  <p>Your privacy matters. This policy explains how we collect, use, store, and protect your personal data.</p>
+  <div class="meta-chips">
+    <span class="chip"><strong>Version:</strong> 1.0</span>
+    <span class="chip"><strong>Last Updated:</strong> January 2026</span>
+    <span class="chip"><strong>Effective:</strong> January 2026</span>
+    <span class="chip"><strong>COPPA Compliant</strong></span>
+  </div>
+</header>
 
-<h2>Information We Collect</h2>
-<ul>
-  <li>Student information (name, class, roll number)</li>
-  <li>Parent and teacher contact details</li>
-  <li>Attendance, academic records, and fee-related data</li>
-  <li>Device information for app performance and security</li>
-</ul>
+<div class="coppa-banner">
+  🛡️ &nbsp;This app may be used by children under 13. We comply fully with <strong>&nbsp;COPPA&nbsp;</strong> and <strong>&nbsp;Google Play Families Policy</strong>.
+</div>
 
-<h2>How We Use Information</h2>
-<ul>
-  <li>To manage school operations</li>
-  <li>To communicate with students, parents, and staff</li>
-  <li>To improve app functionality and security</li>
-</ul>
+<main class="wrapper">
 
-<h2>Data Sharing</h2>
-<p>We do not sell or share personal data with third parties except when required by law or for essential services.</p>
+  <div class="intro-card">
+    <div style="font-size:22px;flex-shrink:0;margin-top:2px;">📄</div>
+    <p><strong>Your privacy is important to us.</strong> This Privacy Policy describes how the Neo School  Application ("we," "our," or "us") collects, uses, stores, shares, and protects your personal information when you use our mobile application. By using the app, you agree to the practices described below.</p>
+  </div>
 
-<h2>Data Security</h2>
-<p>We use reasonable security measures to protect your data from unauthorized access.</p>
+  <!-- Data Overview -->
+  <div class="data-grid">
+    <div class="data-card"><div class="dc-icon">👤</div><div class="dc-label">Identity Data</div><div class="dc-desc">Names, student IDs, roles</div></div>
+    <div class="data-card"><div class="dc-icon">📞</div><div class="dc-label">Contact Data</div><div class="dc-desc">Email, phone, address</div></div>
+    <div class="data-card"><div class="dc-icon">🎓</div><div class="dc-label">Academic Data</div><div class="dc-desc">Grades, attendance, progress</div></div>
+    <div class="data-card"><div class="dc-icon">🏥</div><div class="dc-label">Health Data</div><div class="dc-desc">Allergies, medical notes</div></div>
+    <div class="data-card"><div class="dc-icon">📱</div><div class="dc-label">Device Data</div><div class="dc-desc">Device type, OS, IP address</div></div>
+    <div class="data-card"><div class="dc-icon">📊</div><div class="dc-label">Usage Data</div><div class="dc-desc">Login times, app activity</div></div>
+  </div>
 
-<h2>Children’s Privacy</h2>
-<p>This app is intended for school use. Data of children is collected only with school authorization and parental consent.</p>
+  <!-- TOC -->
+  <div class="toc">
+    <div class="toc-title">📋 Contents</div>
+    <ol>
+      <li><a href="#s1"><span class="toc-num">1</span> Information We Collect</a></li>
+      <li><a href="#s2"><span class="toc-num">2</span> Health Data</a></li>
+      <li><a href="#s3"><span class="toc-num">3</span> How We Use Your Data</a></li>
+      <li><a href="#s4"><span class="toc-num">4</span> Data Sharing</a></li>
+      <li><a href="#s5"><span class="toc-num">5</span> Data Retention</a></li>
+      <li><a href="#s6"><span class="toc-num">6</span> Data Deletion</a></li>
+      <li><a href="#s7"><span class="toc-num">7</span> Children's Privacy (COPPA)</a></li>
+      <li><a href="#s8"><span class="toc-num">8</span> Data Security</a></li>
+      <li><a href="#s9"><span class="toc-num">9</span> Your Rights</a></li>
+      <li><a href="#s10"><span class="toc-num">10</span> Contact Us</a></li>
+    </ol>
+  </div>
 
-<h2>Your Rights</h2>
-<p>You may request data access, correction, or deletion by contacting us.</p>
+  <!-- S1 -->
+  <div class="section" id="s1">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div><div class="section-title">Information We Collect</div><div class="section-subtitle">Types of data we access and gather</div></div>
+    </div>
+    <p>We collect the following categories of data to provide school management services:</p>
+    <table class="data-table">
+      <thead><tr><th>Category</th><th>Examples</th><th>Who It Applies To</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Identity Information</strong></td><td>Full name, student ID, role</td><td>All users</td></tr>
+        <tr><td><strong>Contact Information</strong></td><td>Email, phone number, address</td><td>Parents, teachers, admins</td></tr>
+        <tr><td><strong>Academic Records</strong></td><td>Grades, attendance, timetables</td><td>Students</td></tr>
+        <tr><td><strong>Health &amp; Medical Data</strong></td><td>Allergies, conditions, medications</td><td>Students (with parental consent)</td></tr>
+        <tr><td><strong>Device &amp; Technical Data</strong></td><td>Device type, OS, IP, crash logs</td><td>All users</td></tr>
+        <tr><td><strong>Usage Data</strong></td><td>Login times, features accessed</td><td>All users</td></tr>
+      </tbody>
+    </table>
+    <div class="callout blue">
+      <div class="callout-title">ℹ️ Collection Method</div>
+      Data is collected directly when users register or interact with the app, and automatically via device logs and usage analytics.
+    </div>
+  </div>
 
-<h2>Contact Us</h2>
-<p>Email: abhishekborpa@gmail.com</p>
+  <!-- S2 -->
+  <div class="section" id="s2">
+    <div class="section-header">
+      <div class="section-num green">02</div>
+      <div><div class="section-title">Health Data</div><div class="section-subtitle">Access, collection &amp; usage of sensitive health information</div></div>
+    </div>
+    <div class="callout amber">
+      <div class="callout-title">⚠️ Sensitive Data Notice</div>
+      Health data is classified as sensitive personal information. We collect it only with explicit parental or guardian consent, and use it solely for student safety and welfare.
+    </div>
+    <p style="margin-top:16px;">We may collect and store the following types of health-related data for students:</p>
+    <ul class="policy-list">
+      <li><span class="li-mark green">✓</span><span><strong>Medical Conditions:</strong> Chronic conditions or disabilities relevant to school participation (e.g., asthma, diabetes)</span></li>
+      <li><span class="li-mark green">✓</span><span><strong>Allergies:</strong> Known food, environmental, or medication allergies to ensure student safety</span></li>
+      <li><span class="li-mark green">✓</span><span><strong>Medications:</strong> Prescription medications that need to be administered during school hours</span></li>
+      <li><span class="li-mark green">✓</span><span><strong>Emergency Medical Notes:</strong> Instructions from parents or guardians for emergency situations</span></li>
+    </ul>
+    <p style="margin-top:16px;"><strong>How this health data is used:</strong></p>
+    <ul class="policy-list">
+      <li><span class="li-mark blue">→</span><span>To inform teachers and staff of conditions requiring special attention or accommodation</span></li>
+      <li><span class="li-mark blue">→</span><span>To respond appropriately during medical emergencies on school premises</span></li>
+      <li><span class="li-mark blue">→</span><span>To coordinate care with school nurses or health officers</span></li>
+    </ul>
+    <div class="callout red" style="margin-top:16px;">
+      <div class="callout-title">🚫 Health Data Is Never</div>
+      Sold, shared with advertisers, used for marketing, or disclosed to any third party not directly responsible for student care and welfare.
+    </div>
+  </div>
+
+  <!-- S3 -->
+  <div class="section" id="s3">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div><div class="section-title">How We Use Your Data</div><div class="section-subtitle">Purposes for data processing</div></div>
+    </div>
+    <p>We use your information solely for the following legitimate educational purposes:</p>
+    <ul class="policy-list">
+      <li><span class="li-mark blue">✓</span><span>Providing and operating the school management platform and its features</span></li>
+      <li><span class="li-mark blue">✓</span><span>Maintaining accurate student profiles, academic records, and attendance logs</span></li>
+      <li><span class="li-mark blue">✓</span><span>Facilitating communication between parents, students, teachers, and administrators</span></li>
+      <li><span class="li-mark blue">✓</span><span>Sending notifications about assignments, events, and school announcements</span></li>
+      <li><span class="li-mark blue">✓</span><span>Generating reports and analytics for school administrators to improve educational outcomes</span></li>
+      <li><span class="li-mark blue">✓</span><span>Diagnosing technical issues and improving app performance</span></li>
+    </ul>
+    <div class="callout green" style="margin-top:16px;">
+      <div class="callout-title">✅ No Advertising</div>
+      We do not use your data for targeted advertising, user profiling for commercial gain, or any purpose unrelated to school operations.
+    </div>
+  </div>
+
+  <!-- S4 -->
+  <div class="section" id="s4">
+    <div class="section-header">
+      <div class="section-num purple">04</div>
+      <div><div class="section-title">Data Sharing</div><div class="section-subtitle">Who we share your data with</div></div>
+    </div>
+    <p>We do not sell, rent, or trade your personal information. We only share data in the following limited circumstances:</p>
+    <ul class="policy-list">
+      <li><span class="li-mark amber">!</span><span><strong>School Staff &amp; Administrators:</strong> Authorized personnel access relevant data as part of their official duties</span></li>
+      <li><span class="li-mark amber">!</span><span><strong>Service Providers:</strong> Trusted third-party vendors (e.g., cloud hosting, push notifications) contractually bound to protect your data</span></li>
+      <li><span class="li-mark amber">!</span><span><strong>Legal Obligations:</strong> When required by law, court order, or regulatory authority</span></li>
+      <li><span class="li-mark amber">!</span><span><strong>Emergency Situations:</strong> To protect the vital interests or safety of a student or other person</span></li>
+    </ul>
+  </div>
+
+  <!-- S5 -->
+  <div class="section" id="s5">
+    <div class="section-header">
+      <div class="section-num green">05</div>
+      <div><div class="section-title">Data Retention</div><div class="section-subtitle">How long we store your information</div></div>
+    </div>
+    <p>We retain your data only for as long as necessary to fulfil the purposes for which it was collected, or as required by applicable law:</p>
+    <div class="retention-timeline">
+      <div class="rt-item">
+        <div class="rt-dot">ACT</div>
+        <div class="rt-content">
+          <strong>Active Enrollment Period</strong>
+          <span>All student academic, attendance, and communication data is retained for the full duration of active enrollment.</span>
+        </div>
+      </div>
+      <div class="rt-item">
+        <div class="rt-dot teal">3 YR</div>
+        <div class="rt-content">
+          <strong>Post-Enrollment — Academic Records</strong>
+          <span>Grades, transcripts, and performance records are retained for up to <strong>3 years</strong> after a student leaves, for official reference purposes.</span>
+        </div>
+      </div>
+      <div class="rt-item">
+        <div class="rt-dot green">1 YR</div>
+        <div class="rt-content">
+          <strong>Post-Enrollment — Contact &amp; Health Data</strong>
+          <span>Personal contact details and health records are retained for <strong>1 year</strong> after enrollment ends, then securely deleted.</span>
+        </div>
+      </div>
+      <div class="rt-item">
+        <div class="rt-dot amber">90D</div>
+        <div class="rt-content">
+          <strong>Device &amp; Usage Logs</strong>
+          <span>Technical and usage logs are retained for <strong>90 days</strong> for security and diagnostic purposes, then automatically purged.</span>
+        </div>
+      </div>
+    </div>
+    <div class="callout blue">
+      <div class="callout-title">ℹ️ Legal Override</div>
+      Where retention is required by applicable education law or regulatory mandate, we may retain certain data for longer periods to remain compliant.
+    </div>
+  </div>
+
+  <!-- S6 -->
+  <div class="section" id="s6">
+    <div class="section-header">
+      <div class="section-num red">06</div>
+      <div><div class="section-title">Data Deletion</div><div class="section-subtitle">How to request removal of your data</div></div>
+    </div>
+    <p>You have the right to request deletion of your personal data. Here is how the process works:</p>
+    <ul class="policy-list">
+      <li><span class="li-mark blue" style="font-size:14px;">①</span><span><strong>Submit a Request:</strong> Email <strong>abhishekborpa@gmail.com</strong> with the subject "Data Deletion Request," including your full name, role, and associated school name.</span></li>
+      <li><span class="li-mark blue" style="font-size:14px;">②</span><span><strong>Identity Verification:</strong> We will verify your identity within <strong>5 business days</strong> to protect against unauthorized requests.</span></li>
+      <li><span class="li-mark blue" style="font-size:14px;">③</span><span><strong>Processing:</strong> Once verified, your data will be permanently deleted from our active systems within <strong>30 days</strong>.</span></li>
+      <li><span class="li-mark blue" style="font-size:14px;">④</span><span><strong>Confirmation:</strong> You will receive written confirmation once deletion is complete.</span></li>
+    </ul>
+    <div class="callout amber" style="margin-top:16px;">
+      <div class="callout-title">⚠️ Exceptions to Deletion</div>
+      Some data may be retained even after a deletion request if required by law (e.g., official academic records mandated by education authorities). We will inform you of any exceptions at the time of your request.
+    </div>
+  </div>
+
+  <!-- S7 -->
+  <div class="section" id="s7">
+    <div class="section-header">
+      <div class="section-num purple">07</div>
+      <div><div class="section-title">Children's Privacy (COPPA)</div><div class="section-subtitle">Special protections for users under 13</div></div>
+    </div>
+    <div class="callout purple">
+      <div class="callout-title">🛡️ Children Under 13</div>
+      This application may be used by children under 13 years of age. We apply the highest level of data protection to all minor users in compliance with COPPA and Google Play's Families Policy.
+    </div>
+    <p style="margin-top:16px;">In compliance with <strong>COPPA</strong> and <strong>Google Play Families Policy</strong>, we:</p>
+    <ul class="policy-list">
+      <li><span class="li-mark green">✓</span><span>Require verifiable <strong>parental or guardian consent</strong> before collecting any personal data from children under 13</span></li>
+      <li><span class="li-mark green">✓</span><span>Do <strong>not</strong> display behavioural advertising to children under 13</span></li>
+      <li><span class="li-mark green">✓</span><span>Do <strong>not</strong> collect more data than is strictly necessary for educational functionality</span></li>
+      <li><span class="li-mark green">✓</span><span>Allow parents and guardians to <strong>review, correct, or delete</strong> their child's data at any time</span></li>
+      <li><span class="li-mark green">✓</span><span>Store children's data with <strong>enhanced encryption</strong> and strictly limited access controls</span></li>
+    </ul>
+    <p style="margin-top:14px;">Parents or guardians wishing to review or delete their child's data may contact us at <strong>privacy@yourschoolapp.com</strong>.</p>
+  </div>
+
+  <!-- S8 -->
+  <div class="section" id="s8">
+    <div class="section-header">
+      <div class="section-num">08</div>
+      <div><div class="section-title">Data Security</div><div class="section-subtitle">How we protect your information</div></div>
+    </div>
+    <p>We implement industry-standard security measures to protect your data from unauthorized access, alteration, or disclosure:</p>
+    <ul class="policy-list">
+      <li><span class="li-mark green">🔒</span><span>All data in transit is encrypted using <strong>TLS 1.2+</strong> (HTTPS)</span></li>
+      <li><span class="li-mark green">🔒</span><span>Data at rest is encrypted using <strong>AES-256 encryption</strong></span></li>
+      <li><span class="li-mark green">🔒</span><span>Access to personal data is restricted to authorized personnel on a <strong>need-to-know basis</strong></span></li>
+      <li><span class="li-mark green">🔒</span><span>Regular security audits and vulnerability assessments are conducted</span></li>
+      <li><span class="li-mark green">🔒</span><span>Two-factor authentication (2FA) is available for all administrator accounts</span></li>
+    </ul>
+    <div class="callout amber" style="margin-top:16px;">
+      <div class="callout-title">⚠️ Breach Notification</div>
+      In the event of a data breach affecting your personal information, we will notify affected users and relevant authorities within the timeframe required by applicable law.
+    </div>
+  </div>
+
+  <!-- S9 -->
+  <div class="section" id="s9">
+    <div class="section-header">
+      <div class="section-num green">09</div>
+      <div><div class="section-title">Your Rights</div><div class="section-subtitle">Control over your personal data</div></div>
+    </div>
+    <p>Depending on your location, you may have the following rights regarding your personal data:</p>
+    <ul class="policy-list">
+      <li><span class="li-mark blue">→</span><span><strong>Right of Access:</strong> Request a copy of the personal data we hold about you</span></li>
+      <li><span class="li-mark blue">→</span><span><strong>Right to Rectification:</strong> Request correction of inaccurate or incomplete data</span></li>
+      <li><span class="li-mark blue">→</span><span><strong>Right to Erasure:</strong> Request deletion of your personal data (see Section 6)</span></li>
+      <li><span class="li-mark blue">→</span><span><strong>Right to Restrict Processing:</strong> Request that we limit how we use your data</span></li>
+      <li><span class="li-mark blue">→</span><span><strong>Right to Data Portability:</strong> Request your data in a structured, machine-readable format</span></li>
+      <li><span class="li-mark blue">→</span><span><strong>Right to Object:</strong> Object to processing of your data in certain circumstances</span></li>
+    </ul>
+    <p style="margin-top:14px;">To exercise any of these rights, contact us at <strong>privacy@yourschoolapp.com</strong>. We will respond within <strong>30 days</strong>.</p>
+  </div>
+
+  <!-- S10 -->
+  <div class="section" id="s10">
+    <div class="section-header">
+      <div class="section-num">10</div>
+      <div><div class="section-title">Contact Us</div><div class="section-subtitle">Privacy questions &amp; requests</div></div>
+    </div>
+    <p>If you have any questions about this Privacy Policy or wish to exercise your data rights, please contact our Data Protection Officer:</p>
+    <div class="contact-box">
+      <div>📧 &nbsp;<strong style="color:var(--navy);">Email:abhishekborpa@gmail.com</strong></div>
+      <div>⏱️ &nbsp;<strong style="color:var(--navy);">Response Time:</strong> Within 30 business days</div>
+    </div>
+    <div class="callout green" style="margin-top:18px;">
+      <div class="callout-title">✅ Google Play Compliance</div>
+      This privacy policy has been prepared to comply with Google Play's User Data Policy, Families Policy (COPPA), and all requirements for apps whose audience may include children under 13.
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-divider"></div>
+  <p>
+    <strong>School Management Application — Privacy Policy</strong><br/>
+    Last Updated: <strong>January 2026</strong> &nbsp;·&nbsp; Effective: <strong>January 2026</strong><br/>
+    For terms of use, visit our <a href="#">Terms &amp; Conditions</a>. &nbsp;·&nbsp;
+    Data deletion requests: <a href="mailto:abhishekborpa@gmail.com">abhishekborpa@gmail.com</a>
+  </p>
+  <div style="margin-top:16px; font-size:12px; color:#475569;">© 2026 School Management Application. All rights reserved.</div>
+</footer>
 
 </body>
 </html>
