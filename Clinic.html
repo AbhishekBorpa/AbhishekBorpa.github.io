@@ -1226,6 +1226,109 @@
             border-top: 1px solid var(--border);
             font-weight: 600;
         }
+
+        .payment-section {
+            padding: 80px 5%;
+            background: var(--white);
+        }
+
+        .payment-card {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.4fr 0.6fr;
+            gap: 32px;
+            background: var(--bg-light);
+            padding: 32px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .payment-card h3,
+        .payment-card-right h4 {
+            margin-bottom: 16px;
+        }
+
+        .payment-card-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .payment-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .payment-methods i {
+            font-size: 28px;
+            color: var(--primary);
+        }
+
+        .payment-note {
+            color: var(--text-medium);
+            margin-top: 16px;
+            font-size: 14px;
+        }
+
+        .confirm-payment-card {
+            background: var(--bg-light);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px auto 0;
+            max-width: 520px;
+            text-align: left;
+        }
+
+        .confirm-payment-card h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .confirm-payment-card p {
+            color: var(--text-medium);
+            margin-bottom: 16px;
+        }
+
+        .payment-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+
+        .payment-row strong {
+            font-size: 20px;
+            color: var(--primary);
+        }
+
+        .confirm-payment-status {
+            background: #f0fdf4;
+            border: 1px solid #d1fae5;
+            color: #065f46;
+            padding: 14px 16px;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .confirm-payment-status.paid {
+            background: #ecfdf5;
+            border-color: #a7f3d0;
+            color: #047857;
+        }
+
+        @media (max-width: 768px) {
+            .payment-card {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1238,8 +1341,8 @@
                     <i class="fas fa-plus"></i>
                 </div>
                 <div class="logo-text">
-                    <h1>Budheshwar</h1>
-                    <span> </span>
+                    <h1>CareWell Clinic</h1>
+                    <span>Your Health, Our Priority</span>
                 </div>
             </div>
             <ul class="nav-links">
@@ -1466,6 +1569,54 @@
                                 Book Appointment
                             </button>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mock Payment Section -->
+        <section class="payment-section">
+            <div class="section-header">
+                <h2>Secure Online Payments</h2>
+                <p>Pay your appointment fees instantly with our mock payment flow.</p>
+            </div>
+            <div class="payment-card">
+                <div>
+                    <h3>Mock Payment Details</h3>
+                    <p>Use this demo form to simulate a quick and secure payment.</p>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Amount</label>
+                            <input type="text" id="home-payment-amount" value="₹800" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Card Number</label>
+                            <input type="text" id="home-card-number" placeholder="1234 5678 9012 3456">
+                        </div>
+                        <div class="form-group">
+                            <label>Expiry</label>
+                            <input type="text" id="home-card-expiry" placeholder="MM/YY">
+                        </div>
+                        <div class="form-group">
+                            <label>CVV</label>
+                            <input type="password" id="home-card-cvv" placeholder="123">
+                        </div>
+                        <div class="form-group full">
+                            <button class="btn-primary btn-large" style="width: 100%; justify-content: center;" onclick="handleMockHomePayment()">
+                                Pay Now
+                            </button>
+                        </div>
+                    </div>
+                    <p class="payment-note" id="home-payment-status">This is a demo payment only.</p>
+                </div>
+                <div class="payment-card-right">
+                    <h4>Accepted payment methods</h4>
+                    <div class="payment-methods">
+                        <i class="fab fa-cc-visa" aria-label="Visa"></i>
+                        <i class="fab fa-cc-mastercard" aria-label="Mastercard"></i>
+                        <i class="fab fa-cc-amex" aria-label="American Express"></i>
+                        <i class="fab fa-google-pay" aria-label="Google Pay"></i>
+                        <i class="fab fa-cc-paypal" aria-label="PayPal"></i>
                     </div>
                 </div>
             </div>
@@ -1768,10 +1919,22 @@
                                 </div>
                                 <div class="detail-row">
                                     <span>Amount</span>
-                                    <span style="color: var(--primary); font-weight: 700;">₹800</span>
+                                    <span style="color: var(--primary); font-weight: 700;" id="confirm-payment-amount">₹800</span>
                                 </div>
                             </div>
-                            <button class="btn-primary btn-large" onclick="navigateTo('home')">
+                            <div class="confirm-payment-card">
+                                <h3>Mock Payment</h3>
+                                <p>Complete this demo payment to finalize your appointment confirmation.</p>
+                                <div class="payment-row">
+                                    <span>Amount Due</span>
+                                    <strong id="confirm-payment-amount-label">₹800</strong>
+                                </div>
+                                <div class="confirm-payment-status" id="confirm-payment-status">Payment pending</div>
+                                <button class="btn-primary btn-large" id="confirm-pay-btn" onclick="mockConfirmPayment()">
+                                    Pay Appointment Fee
+                                </button>
+                            </div>
+                            <button class="btn-primary btn-large" onclick="navigateTo('home')" style="margin-top: 20px;">
                                 Back to Home <i class="fas fa-home"></i>
                             </button>
                         </div>
@@ -2207,12 +2370,16 @@
             
             const typeMap = { 'in-clinic': 'In-clinic Visit', 'online': 'Online Consultation' };
             const type = document.querySelector('.type-option.selected input')?.value || 'in-clinic';
+            const amount = document.getElementById('summary-charges').textContent;
             
             document.getElementById('confirm-dept').textContent = deptMap[document.getElementById('dept-select').value] || 'Cardiology';
             document.getElementById('confirm-doctor').textContent = doctorName;
             document.getElementById('confirm-date').textContent = formattedDate;
             document.getElementById('confirm-time').textContent = document.getElementById('time-select').value;
             document.getElementById('confirm-type').textContent = typeMap[type];
+            document.getElementById('confirm-payment-amount').textContent = amount;
+            document.getElementById('confirm-payment-amount-label').textContent = amount;
+            resetPaymentConfirmation();
             
             // Show confirmation
             document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
@@ -2226,6 +2393,51 @@
             });
             
             showToast('Appointment confirmed successfully!');
+        }
+
+        function handleMockHomePayment() {
+            const cardNumber = document.getElementById('home-card-number').value.trim();
+            const cardExpiry = document.getElementById('home-card-expiry').value.trim();
+            const cardCVV = document.getElementById('home-card-cvv').value.trim();
+            const status = document.getElementById('home-payment-status');
+
+            if (!cardNumber || !cardExpiry || !cardCVV) {
+                showToast('Please complete all payment fields');
+                return;
+            }
+
+            status.textContent = 'Mock payment successful! Your demo payment is complete.';
+            status.style.color = '#059669';
+            showToast('Mock payment completed successfully!');
+        }
+
+        function mockConfirmPayment() {
+            const status = document.getElementById('confirm-payment-status');
+            const button = document.getElementById('confirm-pay-btn');
+            if (!status || !button) return;
+
+            status.textContent = 'Paid';
+            status.classList.add('paid');
+            button.textContent = 'Paid';
+            button.disabled = true;
+            button.classList.remove('btn-primary');
+            button.classList.add('btn-outline');
+            showToast('Payment completed successfully!');
+        }
+
+        function resetPaymentConfirmation() {
+            const status = document.getElementById('confirm-payment-status');
+            const button = document.getElementById('confirm-pay-btn');
+            if (status) {
+                status.textContent = 'Payment pending';
+                status.classList.remove('paid');
+            }
+            if (button) {
+                button.textContent = 'Pay Appointment Fee';
+                button.disabled = false;
+                button.classList.remove('btn-outline');
+                button.classList.add('btn-primary');
+            }
         }
 
         function resetBooking() {
@@ -2249,6 +2461,7 @@
             
             updateDoctors();
             updateSummary();
+            resetPaymentConfirmation();
         }
 
         function bookQuickAppointment() {
