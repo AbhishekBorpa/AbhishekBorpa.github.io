@@ -1,0 +1,2329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareWell Clinic - Your Health, Our Priority</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a56db;
+            --primary-dark: #1e429f;
+            --primary-light: #e1effe;
+            --text-dark: #111827;
+            --text-medium: #4b5563;
+            --text-light: #6b7280;
+            --border: #e5e7eb;
+            --bg-light: #f9fafb;
+            --white: #ffffff;
+            --success: #059669;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background: var(--white);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 0 5%;
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 72px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        .logo-text h1 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            line-height: 1.2;
+        }
+
+        .logo-text span {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links .dropdown {
+            position: relative;
+        }
+
+        .nav-links .dropdown i {
+            font-size: 12px;
+            margin-left: 4px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(26, 86, 219, 0.25);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-light);
+        }
+
+        /* Page Sections */
+        .page {
+            display: none;
+            padding-top: 72px;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 80px 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .hero-content h1 span {
+            color: var(--primary);
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            color: var(--text-medium);
+            margin-bottom: 32px;
+            max-width: 480px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .hero-features {
+            display: flex;
+            gap: 32px;
+        }
+
+        .hero-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .hero-feature i {
+            font-size: 20px;
+            color: var(--primary);
+            background: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .hero-feature div h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .hero-feature div p {
+            font-size: 12px;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 5%;
+            background: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-header h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .section-header p {
+            color: var(--text-medium);
+            font-size: 16px;
+        }
+
+        .services-grid {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 24px;
+        }
+
+        .service-card {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 20px rgba(26, 86, 219, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--primary-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            color: var(--primary);
+            font-size: 24px;
+        }
+
+        .service-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .service-card p {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .service-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* About Section */
+        .about {
+            padding: 60px 5%;
+            background: var(--bg-light);
+        }
+
+        .about-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+
+        .about-content h3 {
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .about-content h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .about-content > p {
+            color: var(--text-medium);
+            margin-bottom: 32px;
+            font-size: 15px;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .about-feature {
+            display: flex;
+            gap: 12px;
+        }
+
+        .about-feature i {
+            color: var(--primary);
+            font-size: 18px;
+            margin-top: 2px;
+        }
+
+        .about-feature h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .about-feature p {
+            font-size: 13px;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        /* Appointment Quick Section */
+        .quick-appointment {
+            padding: 80px 5%;
+            background: var(--white);
+        }
+
+        .quick-appointment-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .quick-appointment-left h3 {
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .quick-appointment-left h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .quick-appointment-left > p {
+            color: var(--text-medium);
+            margin-bottom: 32px;
+        }
+
+        .quick-steps {
+            display: flex;
+            gap: 24px;
+        }
+
+        .quick-step {
+            text-align: center;
+            flex: 1;
+        }
+
+        .quick-step i {
+            width: 48px;
+            height: 48px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-size: 20px;
+        }
+
+        .quick-step h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .quick-step p {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        .appointment-form-card {
+            background: var(--bg-light);
+            border-radius: 16px;
+            padding: 32px;
+            border: 1px solid var(--border);
+        }
+
+        .appointment-form-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 0;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+            color: var(--text-dark);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.1);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 60px 5% 32px;
+        }
+
+        .footer-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand .logo-icon {
+            background: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .footer-brand p {
+            color: #9ca3af;
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-links a {
+            width: 36px;
+            height: 36px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+        }
+
+        .footer-column h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .footer-column ul li a:hover {
+            color: white;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+            color: #9ca3af;
+            font-size: 14px;
+        }
+
+        .contact-item i {
+            color: var(--primary);
+            margin-top: 3px;
+        }
+
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        /* Book Appointment Page */
+        .page-header {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 40px 5%;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .page-header-container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .page-header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: var(--text-medium);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--primary);
+        }
+
+        .booking-section {
+            padding: 40px 5%;
+            background: var(--bg-light);
+            min-height: calc(100vh - 300px);
+        }
+
+        .booking-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 32px;
+        }
+
+        .booking-main {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            border: 1px solid var(--border);
+        }
+
+        .booking-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .sidebar-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid var(--border);
+        }
+
+        .sidebar-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar-card h3 i {
+            color: var(--primary);
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .summary-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .summary-label i {
+            color: var(--primary);
+            width: 16px;
+        }
+
+        .summary-value {
+            font-weight: 600;
+            font-size: 14px;
+            text-align: right;
+        }
+
+        .summary-value .sub {
+            font-weight: 400;
+            color: var(--text-light);
+            font-size: 12px;
+        }
+
+        .estimated-charges {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid var(--border);
+        }
+
+        .estimated-charges .amount {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .info-box {
+            background: var(--primary-light);
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .info-box i {
+            color: var(--primary);
+            font-size: 16px;
+            margin-top: 2px;
+        }
+
+        .info-box p {
+            font-size: 13px;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+
+        .security-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 16px;
+            color: var(--text-light);
+            font-size: 13px;
+        }
+
+        /* Wizard Steps */
+        .wizard {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .wizard::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 12%;
+            right: 12%;
+            height: 2px;
+            background: var(--border);
+            z-index: 0;
+        }
+
+        .wizard-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            z-index: 1;
+            cursor: pointer;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-light);
+            transition: all 0.3s;
+        }
+
+        .wizard-step.active .step-number {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .wizard-step.completed .step-number {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+
+        .step-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-light);
+        }
+
+        .wizard-step.active .step-label {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .wizard-step.completed .step-label {
+            color: var(--success);
+        }
+
+        .step-content {
+            display: none;
+        }
+
+        .step-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .form-group select,
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .form-group select:focus,
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .appointment-types {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 8px;
+        }
+
+        .type-option {
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .type-option:hover {
+            border-color: var(--primary-light);
+        }
+
+        .type-option.selected {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        .type-option input {
+            margin-top: 4px;
+            accent-color: var(--primary);
+        }
+
+        .type-option div h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .type-option div p {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        .type-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-light);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 18px;
+        }
+
+        .type-option.selected .type-icon {
+            background: var(--primary);
+            color: white;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 32px;
+        }
+
+        .btn-large {
+            padding: 14px 32px;
+            font-size: 16px;
+        }
+
+        /* Trust Badges */
+        .trust-badges {
+            padding: 40px 5%;
+            background: var(--bg-light);
+            border-top: 1px solid var(--border);
+        }
+
+        .trust-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .trust-item i {
+            font-size: 24px;
+            color: var(--primary);
+            background: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            flex-shrink: 0;
+        }
+
+        .trust-item h4 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .trust-item p {
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            background: var(--text-dark);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s;
+            z-index: 9999;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast i {
+            color: var(--success);
+            font-size: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-container,
+            .about-container,
+            .quick-appointment-container,
+            .booking-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .trust-container {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero-content h1 {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-features {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-steps {
+                flex-direction: column;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .appointment-types {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+
+            .trust-container {
+                grid-template-columns: 1fr;
+            }
+
+            .wizard::before {
+                display: none;
+            }
+        }
+
+        /* Doctor Option */
+        .doctor-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+        }
+
+        .doctor-option img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .doctor-info h4 {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .doctor-info p {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        /* Details Form */
+        .details-form .form-group input {
+            padding: 14px 16px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .checkbox-group input {
+            margin-top: 3px;
+            accent-color: var(--primary);
+        }
+
+        .checkbox-group label {
+            font-size: 13px;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+
+        .confirmation-message {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .confirmation-message i {
+            font-size: 64px;
+            color: var(--success);
+            margin-bottom: 20px;
+        }
+
+        .confirmation-message h2 {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .confirmation-message p {
+            color: var(--text-medium);
+            margin-bottom: 24px;
+        }
+
+        .confirmation-details {
+            background: var(--bg-light);
+            border-radius: 12px;
+            padding: 24px;
+            text-align: left;
+            max-width: 400px;
+            margin: 0 auto 24px;
+        }
+
+        .confirmation-details .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .confirmation-details .detail-row:last-child {
+            margin-bottom: 0;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo" onclick="navigateTo('home')">
+                <div class="logo-icon">
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>CareWell Clinic</h1>
+                    <span>Your Health, Our Priority</span>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" onclick="navigateTo('home')" class="nav-home active">Home</a></li>
+                <li><a href="#about" onclick="scrollToSection('about')">About Us</a></li>
+                <li><a href="#services" onclick="scrollToSection('services')">Services</a></li>
+                <li><a href="#doctors" onclick="scrollToSection('doctors')">Doctors</a></li>
+                <li class="dropdown">
+                    <a href="#">Patient Info <i class="fas fa-chevron-down"></i></a>
+                </li>
+                <li><a href="#contact" onclick="scrollToSection('contact')">Contact</a></li>
+            </ul>
+            <button class="btn-primary" onclick="navigateTo('booking')">
+                <i class="far fa-calendar-check"></i>
+                Book Appointment
+            </button>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home-page" class="page active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1>Compassionate Care<br>for a <span>Healthier You</span></h1>
+                    <p>We provide personalized healthcare solutions with compassion and excellence.</p>
+                    <div class="hero-buttons">
+                        <button class="btn-primary btn-large" onclick="navigateTo('booking')">
+                            Book Appointment <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button class="btn-outline btn-large" onclick="scrollToSection('about')">
+                            Learn More <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                    <div class="hero-features">
+                        <div class="hero-feature">
+                            <i class="fas fa-shield-alt"></i>
+                            <div>
+                                <h4>Experienced Doctors</h4>
+                                <p>Trusted & certified professionals</p>
+                            </div>
+                        </div>
+                        <div class="hero-feature">
+                            <i class="fas fa-heart"></i>
+                            <div>
+                                <h4>Patient Focused</h4>
+                                <p>Your health & comfort come first</p>
+                            </div>
+                        </div>
+                        <div class="hero-feature">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>Convenient Care</h4>
+                                <p>Easy appointments & short wait times</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=800&auto=format&fit=crop&q=80" alt="Doctor">
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services">
+            <div class="section-header">
+                <h2>Our Services</h2>
+                <p>Comprehensive healthcare services for you and your family.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card" onclick="selectService('general')">
+                    <div class="service-icon"><i class="fas fa-stethoscope"></i></div>
+                    <h3>General Consultation</h3>
+                    <p>Routine check-ups and health consultations.</p>
+                    <a href="#" class="service-link">Learn More <i class="fas fa-chevron-right"></i></a>
+                </div>
+                <div class="service-card" onclick="selectService('cardiology')">
+                    <div class="service-icon"><i class="fas fa-heartbeat"></i></div>
+                    <h3>Cardiology</h3>
+                    <p>Heart care, ECG, and cardiovascular consultations.</p>
+                    <a href="#" class="service-link">Learn More <i class="fas fa-chevron-right"></i></a>
+                </div>
+                <div class="service-card" onclick="selectService('pediatrics')">
+                    <div class="service-icon"><i class="fas fa-baby"></i></div>
+                    <h3>Pediatrics</h3>
+                    <p>Complete care for infants, children & adolescents.</p>
+                    <a href="#" class="service-link">Learn More <i class="fas fa-chevron-right"></i></a>
+                </div>
+                <div class="service-card" onclick="selectService('gynecology')">
+                    <div class="service-icon"><i class="fas fa-female"></i></div>
+                    <h3>Gynecology</h3>
+                    <p>Women's health, prenatal care & gynecological services.</p>
+                    <a href="#" class="service-link">Learn More <i class="fas fa-chevron-right"></i></a>
+                </div>
+                <div class="service-card" onclick="selectService('laboratory')">
+                    <div class="service-icon"><i class="fas fa-flask"></i></div>
+                    <h3>Laboratory Services</h3>
+                    <p>Accurate lab tests and health check packages.</p>
+                    <a href="#" class="service-link">Learn More <i class="fas fa-chevron-right"></i></a>
+                </div>
+                <div class="service-card" onclick="selectService('preventive')">
+                    <div class="service-icon"><i class="fas fa-shield-virus"></i></div>
+                    <h3>Preventive Care</h3>
+                    <p>Vaccinations, screenings & wellness programs.</p>
+                    <a href="#" class="service-link">Learn More <i class="fas fa-chevron-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="about-container">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&auto=format&fit=crop&q=80" alt="CareWell Clinic Interior">
+                </div>
+                <div class="about-content">
+                    <h3>About Us</h3>
+                    <h2>We're here to care for you and your family</h2>
+                    <p>At CareWell Clinic, we are dedicated to providing high-quality, compassionate healthcare in a safe and welcoming environment. Your well-being is our mission.</p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <i class="fas fa-user-md"></i>
+                            <div>
+                                <h4>Qualified & Caring Staff</h4>
+                                <p>Our doctors and staff are highly trained and patient-focused.</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-hand-holding-heart"></i>
+                            <div>
+                                <h4>Personalized Care</h4>
+                                <p>We treat every patient with individual attention and respect.</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-hospital"></i>
+                            <div>
+                                <h4>Modern Facilities</h4>
+                                <p>State-of-the-art equipment for accurate diagnosis and treatment.</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>Flexible Appointments</h4>
+                                <p>Book appointments that fit your schedule.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn-primary" onclick="scrollToSection('quick-appointment')">
+                        Learn More About Us <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Appointment Section -->
+        <section id="quick-appointment" class="quick-appointment">
+            <div class="quick-appointment-container">
+                <div class="quick-appointment-left">
+                    <h3>Appointment</h3>
+                    <h2>Book an Appointment</h2>
+                    <p>It's quick and easy</p>
+                    <p style="margin-bottom: 32px;">Choose a convenient time and let us take care of your health.</p>
+                    <div class="quick-steps">
+                        <div class="quick-step">
+                            <i class="far fa-calendar-alt"></i>
+                            <h4>Select Date</h4>
+                            <p>Pick a date that works for you</p>
+                        </div>
+                        <div class="quick-step">
+                            <i class="fas fa-user-md"></i>
+                            <h4>Choose Doctor</h4>
+                            <p>Select your preferred doctor</p>
+                        </div>
+                        <div class="quick-step">
+                            <i class="fas fa-check-circle"></i>
+                            <h4>Get Confirmed</h4>
+                            <p>Receive instant confirmation</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="appointment-form-card">
+                    <h3>Book Your Appointment</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <input type="text" placeholder="Full Name" id="quick-name">
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" placeholder="Phone Number" id="quick-phone">
+                        </div>
+                        <div class="form-group">
+                            <select id="quick-dept">
+                                <option value="">Select Department</option>
+                                <option value="cardiology">Cardiology</option>
+                                <option value="general">General Consultation</option>
+                                <option value="pediatrics">Pediatrics</option>
+                                <option value="gynecology">Gynecology</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select id="quick-doctor">
+                                <option value="">Select Doctor</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="date" id="quick-date">
+                        </div>
+                        <div class="form-group">
+                            <select id="quick-time">
+                                <option value="">Select Time</option>
+                                <option>09:00 AM</option>
+                                <option>09:30 AM</option>
+                                <option>10:00 AM</option>
+                                <option>10:30 AM</option>
+                                <option>11:00 AM</option>
+                                <option>11:30 AM</option>
+                            </select>
+                        </div>
+                        <div class="form-group full">
+                            <button class="btn-primary btn-large" style="width: 100%; justify-content: center;" onclick="bookQuickAppointment()">
+                                Book Appointment
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="contact" class="footer">
+            <div class="footer-container">
+                <div class="footer-brand">
+                    <div class="logo" style="margin-bottom: 16px;">
+                        <div class="logo-icon">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="logo-text">
+                            <h1 style="color: white;">CareWell Clinic</h1>
+                            <span style="color: #9ca3af;">Your Health, Our Priority</span>
+                        </div>
+                    </div>
+                    <p>Providing compassionate, personalized healthcare for you and your family.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a onclick="navigateTo('home')">Home</a></li>
+                        <li><a onclick="scrollToSection('about')">About Us</a></li>
+                        <li><a onclick="scrollToSection('services')">Services</a></li>
+                        <li><a onclick="scrollToSection('doctors')">Doctors</a></li>
+                        <li><a onclick="scrollToSection('contact')">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Patient Info</h4>
+                    <ul>
+                        <li><a onclick="navigateTo('booking')">Appointments</a></li>
+                        <li><a href="#">Insurance</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact Us</h4>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+1 (555) 123-4567</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@carewellclinic.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>123 Health St, Wellness City,<br>HC 12345</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p> CareWell Clinic. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Book Appointment Page -->
+    <div id="booking-page" class="page">
+        <div class="page-header">
+            <div class="page-header-container">
+                <h1>Book an Appointment</h1>
+                <div class="breadcrumb">
+                    <a onclick="navigateTo('home')">Home</a>
+                    <span>/</span>
+                    <span>Book Appointment</span>
+                </div>
+            </div>
+        </div>
+
+        <section class="booking-section">
+            <div class="booking-container">
+                <div class="booking-main">
+                    <div class="wizard">
+                        <div class="wizard-step active" data-step="1" onclick="goToStep(1)">
+                            <div class="step-number">1</div>
+                            <div class="step-label">Choose Service</div>
+                        </div>
+                        <div class="wizard-step" data-step="2" onclick="goToStep(2)">
+                            <div class="step-number">2</div>
+                            <div class="step-label">Select Doctor</div>
+                        </div>
+                        <div class="wizard-step" data-step="3" onclick="goToStep(3)">
+                            <div class="step-number">3</div>
+                            <div class="step-label">Date & Time</div>
+                        </div>
+                        <div class="wizard-step" data-step="4" onclick="goToStep(4)">
+                            <div class="step-number">4</div>
+                            <div class="step-label">Your Details</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 1: Choose Service -->
+                    <div class="step-content active" id="step-1">
+                        <h3 class="step-title">Select Department</h3>
+                        <div class="form-group">
+                            <label>Department</label>
+                            <select id="dept-select" onchange="updateDoctors()">
+                                <option value="">Select a department</option>
+                                <option value="cardiology" selected>Cardiology</option>
+                                <option value="general">General Consultation</option>
+                                <option value="pediatrics">Pediatrics</option>
+                                <option value="gynecology">Gynecology</option>
+                                <option value="laboratory">Laboratory Services</option>
+                                <option value="dermatology">Dermatology</option>
+                            </select>
+                        </div>
+                        
+                        <h3 class="step-title" style="margin-top: 32px;">Select Doctor</h3>
+                        <div class="form-group">
+                            <label>Doctor</label>
+                            <select id="doctor-select" onchange="updateSummary()">
+                                <option value="">Select a doctor</option>
+                                <option value="arjun" selected>Dr. Arjun Mehta - Cardiologist</option>
+                                <option value="priya">Dr. Priya Sharma - Cardiologist</option>
+                                <option value="rahul">Dr. Rahul Verma - General Physician</option>
+                            </select>
+                        </div>
+
+                        <h3 class="step-title" style="margin-top: 32px;">Appointment Type</h3>
+                        <div class="appointment-types">
+                            <div class="type-option selected" onclick="selectType(this, 'in-clinic')">
+                                <input type="radio" name="type" value="in-clinic" checked style="pointer-events: none;">
+                                <div class="type-icon"><i class="fas fa-user"></i></div>
+                                <div>
+                                    <h4>In-clinic Visit</h4>
+                                    <p>Visit our clinic</p>
+                                </div>
+                            </div>
+                            <div class="type-option" onclick="selectType(this, 'online')">
+                                <input type="radio" name="type" value="online" style="pointer-events: none;">
+                                <div class="type-icon"><i class="fas fa-video"></i></div>
+                                <div>
+                                    <h4>Online Consultation</h4>
+                                    <p>Consult via video call</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn-primary btn-large" onclick="nextStep()">
+                                Continue <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Select Doctor (Detailed) -->
+                    <div class="step-content" id="step-2">
+                        <h3 class="step-title">Confirm Doctor Selection</h3>
+                        <div class="form-group">
+                            <label>Selected Department</label>
+                            <select id="dept-select-2" onchange="updateDoctorsStep2()">
+                                <option value="cardiology" selected>Cardiology</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Select Doctor</label>
+                            <select id="doctor-select-2" onchange="updateSummary()">
+                                <option value="arjun" selected>Dr. Arjun Mehta - Cardiologist</option>
+                                <option value="priya">Dr. Priya Sharma - Cardiologist</option>
+                            </select>
+                        </div>
+                        <div class="form-actions">
+                            <button class="btn-outline" onclick="prevStep()" style="margin-right: 12px;">Back</button>
+                            <button class="btn-primary btn-large" onclick="nextStep()">
+                                Continue <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Date & Time -->
+                    <div class="step-content" id="step-3">
+                        <h3 class="step-title">Select Date & Time</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Select Date</label>
+                                <input type="date" id="date-select" value="2025-05-25" onchange="updateSummary()">
+                            </div>
+                            <div class="form-group">
+                                <label>Select Time</label>
+                                <select id="time-select" onchange="updateSummary()">
+                                    <option value="10:30 AM" selected>10:30 AM</option>
+                                    <option value="09:00 AM">09:00 AM</option>
+                                    <option value="09:30 AM">09:30 AM</option>
+                                    <option value="11:00 AM">11:00 AM</option>
+                                    <option value="11:30 AM">11:30 AM</option>
+                                    <option value="02:00 PM">02:00 PM</option>
+                                    <option value="02:30 PM">02:30 PM</option>
+                                    <option value="03:00 PM">03:00 PM</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <h3 class="step-title" style="margin-top: 32px;">Appointment Type</h3>
+                        <div class="appointment-types">
+                            <div class="type-option selected" id="type-in-clinic-3" onclick="selectType(this, 'in-clinic')">
+                                <input type="radio" name="type-3" value="in-clinic" checked style="pointer-events: none;">
+                                <div class="type-icon"><i class="fas fa-user"></i></div>
+                                <div>
+                                    <h4>In-clinic Visit</h4>
+                                    <p>Visit our clinic</p>
+                                </div>
+                            </div>
+                            <div class="type-option" id="type-online-3" onclick="selectType(this, 'online')">
+                                <input type="radio" name="type-3" value="online" style="pointer-events: none;">
+                                <div class="type-icon"><i class="fas fa-video"></i></div>
+                                <div>
+                                    <h4>Online Consultation</h4>
+                                    <p>Consult via video call</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button class="btn-outline" onclick="prevStep()" style="margin-right: 12px;">Back</button>
+                            <button class="btn-primary btn-large" onclick="nextStep()">
+                                Continue <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Your Details -->
+                    <div class="step-content" id="step-4">
+                        <h3 class="step-title">Your Details</h3>
+                        <div class="details-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>First Name *</label>
+                                    <input type="text" id="first-name" placeholder="John">
+                                </div>
+                                <div class="form-group">
+                                    <label>Last Name *</label>
+                                    <input type="text" id="last-name" placeholder="Doe">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Email Address *</label>
+                                    <input type="email" id="email" placeholder="john@example.com">
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone Number *</label>
+                                    <input type="tel" id="phone" placeholder="+1 (555) 000-0000">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Reason for Visit</label>
+                                <input type="text" id="reason" placeholder="Brief description of your symptoms or reason">
+                            </div>
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="terms">
+                                <label for="terms">I agree to the Terms & Conditions and Privacy Policy. I confirm that the information provided is accurate.</label>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button class="btn-outline" onclick="prevStep()" style="margin-right: 12px;">Back</button>
+                            <button class="btn-primary btn-large" onclick="confirmBooking()">
+                                Confirm Appointment <i class="fas fa-check"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Confirmation -->
+                    <div class="step-content" id="step-confirmation">
+                        <div class="confirmation-message">
+                            <i class="fas fa-check-circle"></i>
+                            <h2>Appointment Confirmed!</h2>
+                            <p>Your appointment has been successfully booked. A confirmation email has been sent.</p>
+                            <div class="confirmation-details">
+                                <div class="detail-row">
+                                    <span>Department</span>
+                                    <span id="confirm-dept">Cardiology</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Doctor</span>
+                                    <span id="confirm-doctor">Dr. Arjun Mehta</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Date</span>
+                                    <span id="confirm-date">25 May, 2025</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Time</span>
+                                    <span id="confirm-time">10:30 AM</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Type</span>
+                                    <span id="confirm-type">In-clinic Visit</span>
+                                </div>
+                                <div class="detail-row">
+                                    <span>Amount</span>
+                                    <span style="color: var(--primary); font-weight: 700;">₹800</span>
+                                </div>
+                            </div>
+                            <button class="btn-primary btn-large" onclick="navigateTo('home')">
+                                Back to Home <i class="fas fa-home"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="booking-sidebar">
+                    <div class="sidebar-card">
+                        <h3><i class="far fa-calendar-check"></i> Appointment Summary</h3>
+                        <div class="summary-item">
+                            <div class="summary-label">
+                                <i class="fas fa-heartbeat"></i>
+                                Department
+                            </div>
+                            <div class="summary-value" id="summary-dept">Cardiology</div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-label">
+                                <i class="fas fa-user-md"></i>
+                                Doctor
+                            </div>
+                            <div class="summary-value">
+                                <span id="summary-doctor">Dr. Arjun Mehta</span>
+                                <div class="sub" id="summary-specialty">Cardiologist</div>
+                            </div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-label">
+                                <i class="far fa-calendar"></i>
+                                Date
+                            </div>
+                            <div class="summary-value" id="summary-date">25 May, 2025</div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-label">
+                                <i class="far fa-clock"></i>
+                                Time
+                            </div>
+                            <div class="summary-value" id="summary-time">10:30 AM</div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-label">
+                                <i class="fas fa-user"></i>
+                                Appointment Type
+                            </div>
+                            <div class="summary-value" id="summary-type">In-clinic Visit</div>
+                        </div>
+                        <div class="estimated-charges">
+                            <span>Estimated Charges</span>
+                            <span class="amount" id="summary-charges">₹800</span>
+                        </div>
+                        <div class="info-box">
+                            <i class="fas fa-info-circle"></i>
+                            <p>You will be able to review your details before confirming the appointment.</p>
+                        </div>
+                        <div class="security-badge">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>Your information is secure and encrypted</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="trust-badges">
+            <div class="trust-container">
+                <div class="trust-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <div>
+                        <h4>Trusted & Secure</h4>
+                        <p>Your data is protected with industry-standard security.</p>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h4>Quick Booking</h4>
+                        <p>Book your appointment in just a few simple steps.</p>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-bell"></i>
+                    <div>
+                        <h4>Appointment Reminders</h4>
+                        <p>Get timely reminders via SMS and Email.</p>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-headset"></i>
+                    <div>
+                        <h4>24/7 Support</h4>
+                        <p>Need help? Our support team is always here for you.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-container">
+                <div class="footer-brand">
+                    <div class="logo" style="margin-bottom: 16px;">
+                        <div class="logo-icon"><i class="fas fa-plus"></i></div>
+                        <div class="logo-text">
+                            <h1 style="color: white;">CareWell Clinic</h1>
+                            <span style="color: #9ca3af;">Your Health, Our Priority</span>
+                        </div>
+                    </div>
+                    <p>Providing compassionate, personalized healthcare for you and your family.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a onclick="navigateTo('home')">Home</a></li>
+                        <li><a onclick="navigateTo('home'); scrollToSection('about')">About Us</a></li>
+                        <li><a onclick="navigateTo('home'); scrollToSection('services')">Services</a></li>
+                        <li><a href="#">Doctors</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Patient Info</h4>
+                    <ul>
+                        <li><a href="#">Appointments</a></li>
+                        <li><a href="#">Insurance</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact Us</h4>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+1 (555) 123-4567</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@carewellclinic.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>123 Health St, Wellness City, HC 12345</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p> CareWell Clinic. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message">Appointment booked successfully!</span>
+    </div>
+
+    <script>
+        let currentStep = 1;
+        const doctorsByDept = {
+            cardiology: [
+                { value: 'arjun', name: 'Dr. Arjun Mehta', specialty: 'Cardiologist' },
+                { value: 'priya', name: 'Dr. Priya Sharma', specialty: 'Cardiologist' }
+            ],
+            general: [
+                { value: 'rahul', name: 'Dr. Rahul Verma', specialty: 'General Physician' },
+                { value: 'anita', name: 'Dr. Anita Desai', specialty: 'General Physician' }
+            ],
+            pediatrics: [
+                { value: 'sneha', name: 'Dr. Sneha Patel', specialty: 'Pediatrician' },
+                { value: 'vikram', name: 'Dr. Vikram Rao', specialty: 'Pediatrician' }
+            ],
+            gynecology: [
+                { value: 'meera', name: 'Dr. Meera Iyer', specialty: 'Gynecologist' },
+                { value: 'kavita', name: 'Dr. Kavita Nair', specialty: 'Gynecologist' }
+            ],
+            laboratory: [
+                { value: 'lab1', name: 'Lab Technician Team', specialty: 'Diagnostics' }
+            ],
+            dermatology: [
+                { value: 'raj', name: 'Dr. Raj Malhotra', specialty: 'Dermatologist' }
+            ]
+        };
+
+        const chargesByDept = {
+            cardiology: 800,
+            general: 500,
+            pediatrics: 600,
+            gynecology: 700,
+            laboratory: 450,
+            dermatology: 650
+        };
+
+        function navigateTo(page) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            
+            if (page === 'home') {
+                document.getElementById('home-page').classList.add('active');
+                document.querySelector('.nav-home').classList.add('active');
+                window.scrollTo(0, 0);
+            } else if (page === 'booking') {
+                document.getElementById('booking-page').classList.add('active');
+                window.scrollTo(0, 0);
+                resetBooking();
+            }
+        }
+
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function selectService(service) {
+            navigateTo('booking');
+            document.getElementById('dept-select').value = service;
+            updateDoctors();
+            showToast(`${service.charAt(0).toUpperCase() + service.slice(1)} selected`);
+        }
+
+        function updateDoctors() {
+            const dept = document.getElementById('dept-select').value;
+            const doctorSelect = document.getElementById('doctor-select');
+            const deptSelect2 = document.getElementById('dept-select-2');
+            
+            if (deptSelect2) deptSelect2.value = dept;
+            
+            doctorSelect.innerHTML = '<option value="">Select a doctor</option>';
+            
+            if (doctorsByDept[dept]) {
+                doctorsByDept[dept].forEach(doc => {
+                    const option = document.createElement('option');
+                    option.value = doc.value;
+                    option.textContent = `${doc.name} - ${doc.specialty}`;
+                    doctorSelect.appendChild(option);
+                });
+                if (doctorsByDept[dept].length > 0) {
+                    doctorSelect.value = doctorsByDept[dept][0].value;
+                }
+            }
+            updateDoctorsStep2();
+            updateSummary();
+        }
+
+        function updateDoctorsStep2() {
+            const dept = document.getElementById('dept-select-2')?.value || document.getElementById('dept-select').value;
+            const doctorSelect2 = document.getElementById('doctor-select-2');
+            if (!doctorSelect2) return;
+            
+            doctorSelect2.innerHTML = '<option value="">Select a doctor</option>';
+            
+            if (doctorsByDept[dept]) {
+                doctorsByDept[dept].forEach(doc => {
+                    const option = document.createElement('option');
+                    option.value = doc.value;
+                    option.textContent = `${doc.name} - ${doc.specialty}`;
+                    doctorSelect2.appendChild(option);
+                });
+                const currentDoctor = document.getElementById('doctor-select').value;
+                if (doctorsByDept[dept].find(d => d.value === currentDoctor)) {
+                    doctorSelect2.value = currentDoctor;
+                } else if (doctorsByDept[dept].length > 0) {
+                    doctorSelect2.value = doctorsByDept[dept][0].value;
+                }
+            }
+        }
+
+        function selectType(element, type) {
+            document.querySelectorAll('.type-option').forEach(el => el.classList.remove('selected'));
+            document.querySelectorAll('.type-option input').forEach(el => el.checked = false);
+            
+            element.classList.add('selected');
+            element.querySelector('input').checked = true;
+            
+            // Sync across steps
+            const typeMap = { 'in-clinic': 'In-clinic Visit', 'online': 'Online Consultation' };
+            document.getElementById('summary-type').textContent = typeMap[type];
+            
+            // Update charges based on type
+            updateCharges();
+        }
+
+        function updateCharges() {
+            const dept = document.getElementById('dept-select').value || 'cardiology';
+            const baseCharge = chargesByDept[dept] || 500;
+            const isOnline = document.querySelector('.type-option.selected input')?.value === 'online';
+            const charge = isOnline ? Math.floor(baseCharge * 0.8) : baseCharge;
+            document.getElementById('summary-charges').textContent = `₹${charge}`;
+        }
+
+        function updateSummary() {
+            const deptSelect = document.getElementById('dept-select');
+            const doctorSelect = document.getElementById('doctor-select') || document.getElementById('doctor-select-2');
+            const dateSelect = document.getElementById('date-select');
+            const timeSelect = document.getElementById('time-select');
+            
+            const deptMap = {
+                cardiology: 'Cardiology',
+                general: 'General Consultation',
+                pediatrics: 'Pediatrics',
+                gynecology: 'Gynecology',
+                laboratory: 'Laboratory Services',
+                dermatology: 'Dermatology'
+            };
+            
+            const dept = deptMap[deptSelect.value] || 'Cardiology';
+            document.getElementById('summary-dept').textContent = dept;
+            
+            if (doctorSelect && doctorSelect.value) {
+                const selectedOption = doctorSelect.options[doctorSelect.selectedIndex];
+                const text = selectedOption.text;
+                const [name, specialty] = text.split(' - ');
+                document.getElementById('summary-doctor').textContent = name;
+                document.getElementById('summary-specialty').textContent = specialty;
+            }
+            
+            if (dateSelect && dateSelect.value) {
+                const date = new Date(dateSelect.value);
+                const formatted = date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+                document.getElementById('summary-date').textContent = formatted;
+            }
+            
+            if (timeSelect && timeSelect.value) {
+                document.getElementById('summary-time').textContent = timeSelect.value;
+            }
+            
+            updateCharges();
+        }
+
+        function goToStep(step) {
+            if (step > currentStep + 1) return; // Can't skip ahead
+            
+            // Validate before going to next step
+            if (step > currentStep) {
+                if (!validateStep(currentStep)) return;
+            }
+            
+            currentStep = step;
+            updateWizardUI();
+        }
+
+        function nextStep() {
+            if (validateStep(currentStep)) {
+                if (currentStep < 4) {
+                    currentStep++;
+                    updateWizardUI();
+                }
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateWizardUI();
+            }
+        }
+
+        function validateStep(step) {
+            if (step === 1) {
+                const dept = document.getElementById('dept-select').value;
+                const doctor = document.getElementById('doctor-select').value;
+                if (!dept) { showToast('Please select a department'); return false; }
+                if (!doctor) { showToast('Please select a doctor'); return false; }
+            } else if (step === 3) {
+                const date = document.getElementById('date-select').value;
+                const time = document.getElementById('time-select').value;
+                if (!date) { showToast('Please select a date'); return false; }
+                if (!time) { showToast('Please select a time'); return false; }
+            } else if (step === 4) {
+                const firstName = document.getElementById('first-name').value;
+                const lastName = document.getElementById('last-name').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                const terms = document.getElementById('terms').checked;
+                
+                if (!firstName || !lastName) { showToast('Please enter your name'); return false; }
+                if (!email) { showToast('Please enter your email'); return false; }
+                if (!phone) { showToast('Please enter your phone number'); return false; }
+                if (!terms) { showToast('Please agree to the terms'); return false; }
+            }
+            return true;
+        }
+
+        function updateWizardUI() {
+            document.querySelectorAll('.wizard-step').forEach((el, index) => {
+                const stepNum = index + 1;
+                el.classList.remove('active', 'completed');
+                if (stepNum === currentStep) {
+                    el.classList.add('active');
+                } else if (stepNum < currentStep) {
+                    el.classList.add('completed');
+                    el.querySelector('.step-number').innerHTML = '<i class="fas fa-check"></i>';
+                } else {
+                    el.querySelector('.step-number').textContent = stepNum;
+                }
+            });
+            
+            document.querySelectorAll('.step-content').forEach((el, index) => {
+                el.classList.remove('active');
+                if (index + 1 === currentStep) {
+                    el.classList.add('active');
+                }
+            });
+        }
+
+        function confirmBooking() {
+            if (!validateStep(4)) return;
+            
+            // Populate confirmation details
+            const deptMap = {
+                cardiology: 'Cardiology',
+                general: 'General Consultation',
+                pediatrics: 'Pediatrics',
+                gynecology: 'Gynecology',
+                laboratory: 'Laboratory Services',
+                dermatology: 'Dermatology'
+            };
+            
+            const doctorSelect = document.getElementById('doctor-select') || document.getElementById('doctor-select-2');
+            const selectedOption = doctorSelect.options[doctorSelect.selectedIndex];
+            const [doctorName] = selectedOption.text.split(' - ');
+            
+            const date = new Date(document.getElementById('date-select').value);
+            const formattedDate = date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+            
+            const typeMap = { 'in-clinic': 'In-clinic Visit', 'online': 'Online Consultation' };
+            const type = document.querySelector('.type-option.selected input')?.value || 'in-clinic';
+            
+            document.getElementById('confirm-dept').textContent = deptMap[document.getElementById('dept-select').value] || 'Cardiology';
+            document.getElementById('confirm-doctor').textContent = doctorName;
+            document.getElementById('confirm-date').textContent = formattedDate;
+            document.getElementById('confirm-time').textContent = document.getElementById('time-select').value;
+            document.getElementById('confirm-type').textContent = typeMap[type];
+            
+            // Show confirmation
+            document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
+            document.getElementById('step-confirmation').classList.add('active');
+            
+            // Update wizard to show all completed
+            document.querySelectorAll('.wizard-step').forEach(el => {
+                el.classList.remove('active');
+                el.classList.add('completed');
+                el.querySelector('.step-number').innerHTML = '<i class="fas fa-check"></i>';
+            });
+            
+            showToast('Appointment confirmed successfully!');
+        }
+
+        function resetBooking() {
+            currentStep = 1;
+            document.getElementById('dept-select').value = 'cardiology';
+            document.getElementById('date-select').value = '2025-05-25';
+            document.getElementById('time-select').value = '10:30 AM';
+            document.getElementById('first-name').value = '';
+            document.getElementById('last-name').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('phone').value = '';
+            document.getElementById('reason').value = '';
+            document.getElementById('terms').checked = false;
+            
+            // Reset wizard
+            document.querySelectorAll('.wizard-step').forEach((el, index) => {
+                el.classList.remove('active', 'completed');
+                if (index === 0) el.classList.add('active');
+                el.querySelector('.step-number').textContent = index + 1;
+            });
+            
+            updateDoctors();
+            updateSummary();
+        }
+
+        function bookQuickAppointment() {
+            const name = document.getElementById('quick-name').value;
+            const phone = document.getElementById('quick-phone').value;
+            const dept = document.getElementById('quick-dept').value;
+            const doctor = document.getElementById('quick-doctor').value;
+            const date = document.getElementById('quick-date').value;
+            const time = document.getElementById('quick-time').value;
+            
+            if (!name || !phone || !dept || !doctor || !date || !time) {
+                showToast('Please fill in all fields');
+                return;
+            }
+            
+            showToast(`Appointment booked for ${name} on ${date} at ${time}`);
+            
+            // Clear form
+            document.getElementById('quick-name').value = '';
+            document.getElementById('quick-phone').value = '';
+            document.getElementById('quick-dept').value = '';
+            document.getElementById('quick-doctor').innerHTML = '<option value="">Select Doctor</option>';
+            document.getElementById('quick-date').value = '';
+            document.getElementById('quick-time').value = '';
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // Quick appointment department change
+        document.getElementById('quick-dept')?.addEventListener('change', function() {
+            const doctorSelect = document.getElementById('quick-doctor');
+            doctorSelect.innerHTML = '<option value="">Select Doctor</option>';
+            
+            if (doctorsByDept[this.value]) {
+                doctorsByDept[this.value].forEach(doc => {
+                    const option = document.createElement('option');
+                    option.value = doc.value;
+                    option.textContent = doc.name;
+                    doctorSelect.appendChild(option);
+                });
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDoctors();
+            updateSummary();
+            
+            // Set today's date as minimum
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('date-select').min = today;
+            document.getElementById('quick-date').min = today;
+        });
+
+        // Sync type selection across steps
+        document.querySelectorAll('.type-option').forEach(el => {
+            el.addEventListener('click', function() {
+                const type = this.querySelector('input').value;
+                // Sync all type options
+                document.querySelectorAll('.type-option').forEach(opt => {
+                    if (opt.querySelector('input').value === type) {
+                        opt.classList.add('selected');
+                        opt.querySelector('input').checked = true;
+                    } else {
+                        opt.classList.remove('selected');
+                        opt.querySelector('input').checked = false;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
